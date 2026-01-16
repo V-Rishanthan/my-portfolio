@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Antonio:wght@100..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Your custom colors */
+  --color-primary: #5e67e6;
+  --color-background: #ffffff;
+  --color-text: #303030;
+  --color-input: #f5f5f5;
+  
+  /* Primary color scale */
+  --color-primary-50: #eff1fe;
+  --color-primary-100: #e2e5fd;
+  --color-primary-200: #cbcefa;
+  --color-primary-300: #a9aef6;
+  --color-primary-400: #8788ef;
+  --color-primary-500: #5e67e6;
+  --color-primary-600: #4d4ddb;
+  --color-primary-700: #413ec9;
+  --color-primary-800: #3634a3;
+  --color-primary-900: #302f81;
+  --color-primary-950: #1e1c4b;
+
+  /* Define font families properly for Tailwind */
+  --font-antonio: "Antonio", sans-serif;
+  --font-inter: "Inter", sans-serif;
+}
+
+/* Apply base styles - use CSS directly instead of @apply for font-family */
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: "Inter", sans-serif;
+}
+
+/* Define heading styles */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Antonio", sans-serif;
+}
+
+/* Create custom utility classes */
+.font-antonio {
+  font-family: var(--font-antonio);
+}
+
+.font-inter {
+  font-family: var(--font-inter);
+}
