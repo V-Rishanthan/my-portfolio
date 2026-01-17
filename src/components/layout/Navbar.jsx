@@ -1,20 +1,27 @@
-import React, { useState } from 'react';
-import { Menu, X, ExternalLink } from 'lucide-react';
+import React, { useState } from "react";
+import { Menu, X, ExternalLink, Linkedin, Github } from "lucide-react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Services', href: '#services' },
-    { name: 'Contact', href: '#contact' },
+    { name: "Home", href: "#home" },
+    { name: "About", href: "#about" },
+    { name: "Services", href: "#services" },
+    { name: "Contact", href: "#contact" },
   ];
 
   const socialLinks = [
-    { name: 'Dribbble', icon: '💎', href: '#' },
-    { name: 'Behance', icon: '🅱', href: '#' },
-    { name: 'LinkedIn', icon: '💼', href: '#' },
+    {
+      name: "LinkedIn",
+      icon: <Linkedin />,
+      href: "https://www.linkedin.com/in/rishanthan-v/",
+    },
+    {
+      name: "Github",
+      icon: <Github />,
+      href: "https://github.com/V-Rishanthan",
+    },
   ];
 
   const toggleMenu = () => {
@@ -27,26 +34,22 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <a 
-              href="#home" 
-              className="text-2xl font-bold text-gray-900 hover:text-primary-600 transition-colors"
-            >
-              DR<span className="text-primary-600">.</span>
+            <a href="#home" className="text-xl font-bold text-gray-900">
+              Rish<span className="text-primary-600">.</span>
+              <span className="ml-1 text-sm font-medium text-gray-500">
+                dev
+              </span>
             </a>
           </div>
 
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="nav-link"
-              >
+              <a key={link.name}  href={link.href}  className="nav-link">
                 {link.name}
               </a>
             ))}
-            
+
             {/* Social Links */}
             <div className="flex items-center space-x-4 ml-4 pl-4 border-l border-gray-200">
               {socialLinks.map((social) => (
@@ -92,7 +95,7 @@ const Navbar = () => {
                   {link.name}
                 </a>
               ))}
-              
+
               {/* Mobile Social Links */}
               <div className="flex justify-center space-x-6 pt-4 border-t border-gray-100">
                 {socialLinks.map((social) => (

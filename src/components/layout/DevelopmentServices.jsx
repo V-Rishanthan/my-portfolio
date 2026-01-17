@@ -17,7 +17,7 @@ const DevelopmentServices = () => {
   ];
 
   return (
-    <section className="py-16" style={{ backgroundColor: '#f5f5f5' }}>
+    <section id='services' className="py-16" style={{ backgroundColor: '#f5f5f5' }}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="text-3xl md:text-4xl font-black text-primary mb-4 fontAntonio">

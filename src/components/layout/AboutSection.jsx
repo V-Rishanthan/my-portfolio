@@ -7,27 +7,27 @@ import aboutImage from '../../assets/ownerImage.jpeg';
 
 const AboutSection = () => {
   const highlights = [
-    "Specialized in Framer Development",
-    "Expert in React & Next.js Applications",
-    "UI/UX Design with User-Centered Approach",
-    "Mobile App Development with React Native",
-    "End-to-End Project Delivery",
-    "Responsive & Modern Web Design"
+     "UI/UX Design with a User-Centered Approach",
+  "Web Application Development with React",
+  "Mobile App Development with React Native",
+  "SEO Optimization & Performance Best Practices",
+  "End-to-End Project Delivery",
+  "Responsive & Modern Web Design"
   ];
 
-  const skills = [
-    "UI/UX Design",
-    "Framer Development",
-    "React Native",
-    "Next.js",
-    "React.js",
-    "Prototyping",
-    "Web Development",
-    "Mobile Development"
-  ];
+ const skills = [
+  "UI/UX Design",
+  "Web Application Development",
+  "Mobile App Development",
+  "React.js",
+  "React Native",
+  "SEO Optimization",
+  "Responsive Design",
+  "Prototyping"
+];
 
   return (
-    <section id='#about' className="py-20 bg-white">
+    <section id='about' className="py-20 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 bg-primary-50 text-primary-700 px-4 py-2 rounded-full text-sm font-medium mb-6 fontAntonio">
