@@ -9,12 +9,12 @@ export default function Portfolio() {
     {
       name: "GitHub",
       icon: <Github className="h-5 w-5" />,
-      href: "https://github.com/yourusername",
+      href: "https://github.com/V-Rishanthan",
     },
     {
       name: "LinkedIn",
       icon: <Linkedin className="h-5 w-5" />,
-      href: "https://linkedin.com/in/yourusername",
+      href: "https://www.linkedin.com/in/rishanthan-v/",
     },
   ];
 

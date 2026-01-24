@@ -59,24 +59,14 @@ const skills = [
 
               <div className="flex items-center gap-4 mb-6">
                 <div className="h-1 w-12 bg-gradient-to-r from-primary-500 to-transparent rounded-full"></div>
-                <h3 className="text-xl md:text-2xl font-semibold text-gray-700">
-                  DIGITAL DESIGNER & DEVELOPER
+                <h3 className="text-xl md:text-2xl font-semibold text-gray-700 uppercase">
+                  Software Engineer (Web & Mobile)
                 </h3>
                 <div className="h-1 w-12 bg-gradient-to-r from-transparent to-blue-500 rounded-full"></div>
               </div>
             </div>
 
-            {/* Description */}
-            {/* <p className="text-lg md:text-xl text-gray-600 leading-relaxed mb-8">
-              I help businesses and startups create exceptional digital
-              experiences through expert{" "}
-              <span className="font-bold text-primary-600">UI/UX design</span>{" "}
-              and{" "}
-              <span className="font-bold text-primary-600">
-                Framer development
-              </span>
-              . From concept to launch, I deliver solutions that drive results.
-            </p> */}
+          
 
             <p className="text-lg md:text-xl text-gray-600 leading-relaxed mb-8">
               I help businesses and startups create exceptional digital
@@ -148,7 +138,7 @@ const skills = [
                       </a>
                     </div>
                   </div>
-                  <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-primary-600/10 to-blue-600/10 rounded-bl-3xl"></div>
+                  {/* <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-primary-600/10 to-blue-600/10 rounded-bl-3xl"></div> */}
                 </div>
 
                 {/* Portfolio Content Button */}
@@ -190,7 +180,7 @@ const skills = [
                       </Link>
                     </div>
                   </div>
-                  <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-gray-100 to-gray-200 rounded-bl-3xl"></div>
+                  {/* <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-gray-100 to-gray-200 rounded-bl-3xl"></div> */}
                 </div>
               </div>
 

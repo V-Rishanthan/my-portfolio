@@ -50,7 +50,7 @@ const ContactInfo = () => {
               </div>
               
               <a 
-                href="mailto:updatelogesh@gmail.com"
+                href="mailto:rishanthan390@gmail.com"
                 className="inline-flex items-center justify-center gap-2 w-full bg-gradient-to-r from-primary to-primary-600 text-white py-3.5 rounded-xl font-semibold hover:shadow-xl hover:shadow-primary/20 transition-all duration-300 fontAntonio"
               >
                 Send Email
@@ -78,7 +78,7 @@ const ContactInfo = () => {
                 <div>
                   <p className="text-sm text-gray-500 mb-1 fontAntonio">Send message at</p>
                   <a 
-                    href="https://wa.me/919094876815"
+                    href="https://wa.me/763468914"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-lg font-semibold text-white hover:text-green-400 transition-colors fontAntonio"
