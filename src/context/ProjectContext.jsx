@@ -27,7 +27,7 @@ export const ProjectContextProvider = ({ children }) => {
 
   useEffect(() => {
     fetchProjects();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+   
   }, []);
 
   return (

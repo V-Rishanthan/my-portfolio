@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import { useFirestore } from "../../hooks/useFirestore";
+import AdminProjectsCards from "./display/AdminProjectsCards";
 
 const MAX_IMAGES = 20;
 
@@ -313,7 +314,7 @@ const ProjectsEditor = () => {
         imagePaths: [...editForm.existingImagePaths, ...newPaths],
       });
 
-      toast.success("Project updated ✅");
+      toast.success("Project updated ");
 
       // cleanup previews
       editForm.newImages.forEach((img) => {
@@ -341,7 +342,7 @@ const ProjectsEditor = () => {
       }
 
       await deleteDocument(p.id);
-      toast.success("Project deleted ✅");
+      toast.success("Project deleted ");
       await fetchProjects();
     } catch (err) {
       toast.error(err?.message || "Failed to delete project");
@@ -519,258 +520,10 @@ const ProjectsEditor = () => {
 
       {/* ================= View Projects ================= */}
       <section className="border rounded-lg p-5">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-semibold">View Projects</h2>
-          <button
-            type="button"
-            onClick={fetchProjects}
-            className="px-4 py-2 bg-blue-600 text-white rounded"
-          >
-            Refresh
-          </button>
-        </div>
+        <AdminProjectsCards/>
 
-        {loadingList ? (
-          <p className="text-gray-600">Loading projects...</p>
-        ) : projects.length === 0 ? (
-          <p className="text-gray-600">No projects found.</p>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {projects.map((p) => (
-              <div key={p.id} className="border rounded-lg p-4">
-                {/* If editing this card */}
-                {editingId === p.id ? (
-                  <div className="space-y-3">
-                    <div>
-                      <label className="block mb-1 font-medium">Title</label>
-                      <input
-                        name="title"
-                        value={editForm.title}
-                        onChange={handleEditChange}
-                        className="w-full p-2 border rounded"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block mb-1 font-medium">Description</label>
-                      <textarea
-                        name="description"
-                        value={editForm.description}
-                        onChange={handleEditChange}
-                        className="w-full p-2 border rounded"
-                        rows={3}
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block mb-1 font-medium">Technologies</label>
-                      <div className="flex gap-2 mb-2">
-                        <input
-                          type="text"
-                          value={editTechInput}
-                          onChange={(e) => setEditTechInput(e.target.value)}
-                          className="flex-1 p-2 border rounded"
-                          placeholder="Add technology"
-                          onKeyDown={(e) => {
-                            if (e.key === "Enter") {
-                              e.preventDefault();
-                              editAddTech();
-                            }
-                          }}
-                        />
-                        <button
-                          type="button"
-                          onClick={editAddTech}
-                          className="px-4 bg-blue-600 text-white rounded"
-                        >
-                          Add
-                        </button>
-                      </div>
-
-                      <div className="flex flex-wrap gap-2">
-                        {editForm.technologies.map((tech) => (
-                          <span
-                            key={tech}
-                            className="flex items-center gap-2 px-3 py-1 bg-gray-100 rounded"
-                          >
-                            {tech}
-                            <button
-                              type="button"
-                              onClick={() => editRemoveTech(tech)}
-                              className="text-red-600 font-bold"
-                            >
-                              ×
-                            </button>
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block mb-1 font-medium">GitHub Link</label>
-                      <input
-                        name="gitLink"
-                        value={editForm.gitLink}
-                        onChange={handleEditChange}
-                        className="w-full p-2 border rounded"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block mb-1 font-medium">
-                        Existing Images
-                      </label>
-                      {editForm.existingImageUrls.length === 0 ? (
-                        <p className="text-sm text-gray-600">No images</p>
-                      ) : (
-                        <div className="grid grid-cols-3 gap-2">
-                          {editForm.existingImageUrls.map((url, idx) => (
-                            <div key={`${url}_${idx}`} className="relative group">
-                              <img
-                                src={url}
-                                alt="existing"
-                                className="w-full h-20 object-cover rounded border"
-                              />
-                              <button
-                                type="button"
-                                onClick={() => removeExistingImage(idx)}
-                                className="absolute top-1 right-1 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition"
-                                title="Remove from project"
-                              >
-                                ×
-                              </button>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-
-                    <div>
-                      <label className="block mb-1 font-medium">
-                        Add New Images
-                      </label>
-                      <input
-                        type="file"
-                        accept="image/*"
-                        multiple
-                        onChange={editUploadImages}
-                        className="block w-full text-sm text-gray-500
-                          file:mr-4 file:py-2 file:px-4
-                          file:rounded-full file:border-0
-                          file:text-sm file:font-semibold
-                          file:bg-blue-50 file:text-blue-700
-                          hover:file:bg-blue-100"
-                      />
-
-                      {editForm.newImages.length > 0 && (
-                        <div className="grid grid-cols-3 gap-2 mt-2">
-                          {editForm.newImages.map((img) => (
-                            <div key={img.id} className="relative group">
-                              <img
-                                src={img.preview}
-                                alt="new"
-                                className="w-full h-20 object-cover rounded border"
-                              />
-                              <button
-                                type="button"
-                                onClick={() => removeNewImage(img.id)}
-                                className="absolute top-1 right-1 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition"
-                              >
-                                ×
-                              </button>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="flex gap-2">
-                      <button
-                        type="button"
-                        onClick={saveEdit}
-                        disabled={isUpdating}
-                        className="px-4 py-2 bg-green-600 text-white rounded"
-                      >
-                        {isUpdating ? "Updating..." : "Update"}
-                      </button>
-                      <button
-                        type="button"
-                        onClick={cancelEdit}
-                        className="px-4 py-2 bg-gray-200 rounded"
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </div>
-                ) : (
-                  // Normal card view
-                  <div className="space-y-2">
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <h3 className="text-lg font-semibold">{p.title}</h3>
-                        <p className="text-sm text-gray-600">{p.description}</p>
-                      </div>
-                      <div className="flex gap-2">
-                        <button
-                          type="button"
-                          onClick={() => startEdit(p)}
-                          className="px-3 py-1 bg-blue-600 text-white rounded"
-                        >
-                          Edit
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => handleDelete(p)}
-                          className="px-3 py-1 bg-red-600 text-white rounded"
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    </div>
-
-                    {Array.isArray(p.technologies) && p.technologies.length > 0 && (
-                      <div className="flex flex-wrap gap-2">
-                        {p.technologies.map((t) => (
-                          <span
-                            key={t}
-                            className="text-xs px-2 py-1 bg-gray-100 rounded"
-                          >
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-
-                    {p.gitLink && (
-                      <a
-                        href={p.gitLink}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-sm text-blue-600 underline"
-                      >
-                        GitHub
-                      </a>
-                    )}
-
-                    {Array.isArray(p.imageUrls) && p.imageUrls.length > 0 && (
-                      <div className="grid grid-cols-3 gap-2 mt-2">
-                        {p.imageUrls.slice(0, 6).map((url, idx) => (
-                          <img
-                            key={`${p.id}_${idx}`}
-                            src={url}
-                            alt="project"
-                            className="w-full h-20 object-cover rounded border"
-                          />
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        )}
       </section>
+      
     </div>
   );
 };
