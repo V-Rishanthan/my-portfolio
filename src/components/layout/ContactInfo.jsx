@@ -104,7 +104,7 @@ const ContactInfo = () => {
         {/* Response Time */}
         <div className="text-center mt-16">
           <div className="inline-flex items-center gap-3 bg-gray-800/50 backdrop-blur-sm text-gray-300 px-8 py-4 rounded-full font-medium fontAntonio border border-gray-700">
-            ⚡ Response time: Usually within 6-8 hours
+             Response time: Usually within 6-8 hours
           </div>
         </div>
       </div>

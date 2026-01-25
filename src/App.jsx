@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import Portfolio from "./pages/Portfolio";
+import Portfolio from "./pages/Portfolio/Portfolio";
 import Footer from "./components/layout/Footer";
 import ScrollToTopButton from "./components/layout/ScrollToTopButton";
 import NotFound from "./pages/NotFound";

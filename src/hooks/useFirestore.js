@@ -10,6 +10,7 @@ import {
   getDocs,
   query,
   orderBy,
+  setDoc,
 } from "firebase/firestore";
 
 import {
@@ -37,6 +38,22 @@ export const useFirestore = (fbCollection) => {
 
     const docRef = await addDoc(collectionRef, payload);
     return docRef;
+  };
+
+  // SET
+  const setDocument = async (id, data) => {
+    const docRef = doc(db, fbCollection, id);
+
+    await setDoc(
+      docRef,
+      {
+        ...data,
+        updatedAt: serverTimestamp(),
+      },
+      { merge: true }, // keep existing fields if not provided
+    );
+
+    return true;
   };
 
   //  READ ONE
@@ -104,5 +121,6 @@ export const useFirestore = (fbCollection) => {
     deleteDocument,
     uploadImage,
     deleteImage,
+    setDocument,
   };
 };
