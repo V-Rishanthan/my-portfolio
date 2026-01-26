@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Download, Mail, Linkedin, Github } from "lucide-react";
-import { useFirestore } from "../../hooks/useFirestore"; // ✅ adjust path if needed
+import { useFirestore } from "../../hooks/useFirestore"; 
 
 const Social = () => {
   const socials = [
@@ -50,7 +50,7 @@ const Social = () => {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3">
-          {/* ✅ CV Download from Firebase */}
+          {/* CV Download from Firebase */}
           <a
             href={cvUrl || "#"}
             target="_blank"
@@ -106,3 +106,5 @@ const Social = () => {
 };
 
 export default Social;
+
+

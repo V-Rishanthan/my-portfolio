@@ -6,7 +6,7 @@ const Education = () => {
     {
       place: "ESOFT Metro Campus",
       program: "Higher National Diploma in Computer Software Engineering",
-      date: "March 2023 – February 2025",
+      date: "March 2023 – September  2025",
     },
     {
       place: "IAPS Campus - International Academy of Professional Studies",

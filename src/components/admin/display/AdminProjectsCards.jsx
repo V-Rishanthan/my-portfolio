@@ -1,11 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import { useProject } from "../../../context/ProjectContext";
 import { useFirestore } from "../../../hooks/useFirestore";
 
 const AdminProjectsCards = () => {
-  const { projects, loading, refreshProjects } = useProject();
+  const projectCtx = useProject();
   const { updateDocument, deleteDocument, deleteImage } = useFirestore("projects");
+
+  // ✅ make safe values (prevents "not a function")
+  const projects = projectCtx?.projects || [];
+  const loading = projectCtx?.loading || false;
+  const refreshProjects =
+    typeof projectCtx?.refreshProjects === "function"
+      ? projectCtx.refreshProjects
+      : async () => {}; // fallback safe function
 
   const [editingId, setEditingId] = useState(null);
   const [form, setForm] = useState({
@@ -16,7 +24,8 @@ const AdminProjectsCards = () => {
   });
 
   useEffect(() => {
-    if (!projects?.length) refreshProjects?.();
+    // ✅ only call if it's a function (it is, because fallback exists)
+    if (!projects?.length) refreshProjects();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -59,11 +68,13 @@ const AdminProjectsCards = () => {
         technologies,
       });
 
-      toast.success("Project updated ✅");
+      toast.success("Project updated ");
       cancelEdit();
+
+      // ✅ safe refresh
       await refreshProjects();
     } catch (err) {
-      toast.error(err?.message || "Update failed ❌");
+      toast.error(err?.message || "Update failed ");
     }
   };
 
@@ -77,10 +88,12 @@ const AdminProjectsCards = () => {
       }
 
       await deleteDocument(p.id);
-      toast.success("Project deleted ✅");
+      toast.success("Project deleted ");
+
+      // ✅ safe refresh
       await refreshProjects();
     } catch (err) {
-      toast.error(err?.message || "Delete failed ❌");
+      toast.error(err?.message || "Delete failed ");
     }
   };
 
@@ -88,9 +101,11 @@ const AdminProjectsCards = () => {
     <div className="bg-white border rounded-xl p-5">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-semibold">All Projects (Admin)</h2>
+
+        {/* ✅ safe refresh */}
         <button
           type="button"
-          onClick={refreshProjects}
+          onClick={() => refreshProjects()}
           className="px-4 py-2 bg-blue-600 text-white rounded"
         >
           Refresh
@@ -133,9 +148,7 @@ const AdminProjectsCards = () => {
                     rows={3}
                   />
                 ) : (
-                  <p className="text-sm text-gray-600 line-clamp-3">
-                    {p.description}
-                  </p>
+                  <p className="text-sm text-gray-600 line-clamp-3">{p.description}</p>
                 )}
 
                 {/* GitHub */}
@@ -162,9 +175,7 @@ const AdminProjectsCards = () => {
 
                 {/* Technologies */}
                 <div>
-                  <p className="text-xs font-semibold text-gray-700 mb-1">
-                    Technologies
-                  </p>
+                  <p className="text-xs font-semibold text-gray-700 mb-1">Technologies</p>
 
                   {isEditing ? (
                     <input
@@ -190,7 +201,7 @@ const AdminProjectsCards = () => {
                   )}
                 </div>
 
-                {/* Thumbnails only */}
+                {/* Thumbnails */}
                 {Array.isArray(p.imageUrls) && p.imageUrls.length > 0 && (
                   <div className="flex gap-2 flex-wrap pt-1">
                     {p.imageUrls.slice(0, 4).map((url, idx) => (

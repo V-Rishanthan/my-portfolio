@@ -42,9 +42,7 @@ export default function Portfolio() {
         <Projects />
       </main>
 
-      <footer className="py-10 text-center text-sm text-gray-500">
-        © {new Date().getFullYear()} Rishanthan V. All rights reserved.
-      </footer>
+      
     </div>
   );
 }

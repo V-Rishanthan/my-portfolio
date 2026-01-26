@@ -520,7 +520,13 @@ const ProjectsEditor = () => {
 
       {/* ================= View Projects ================= */}
       <section className="border rounded-lg p-5">
-        <AdminProjectsCards/>
+        {/* <AdminProjectsCards/> */}
+        <AdminProjectsCards
+  projects={projects}
+  loading={loadingList}
+  refresh={fetchProjects}
+/>
+
 
       </section>
       
