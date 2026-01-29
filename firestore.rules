@@ -1,0 +1,61 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Your admin UID (replace with yours)
+    function isAdmin() {
+      return request.auth != null && request.auth.uid == '3Tph9C0M8dO1hQ94jbtjGp6SNE83';
+    }
+    
+    // Everyone can read (Home/Portfolio pages)
+    function canRead() {
+      return true;
+    }
+    
+    // Only your admin can write
+    function canWrite() {
+      return isAdmin();
+    }
+    
+    // Hero section
+    match /hero/{id} {
+      allow read: if canRead();
+      allow write: if canWrite();
+    }
+    
+    // Contact section
+    match /contact/{id} {
+      allow read: if canRead();
+      allow write: if canWrite();
+    }
+    
+    // Projects
+    match /projects/{id} {
+      allow read: if canRead();
+      allow write: if canWrite();
+    }
+    
+    // Education
+    match /education/{id} {
+      allow read: if canRead();
+      allow write: if canWrite();
+    }
+    
+    // Languages
+    match /languages/{id} {
+      allow read: if canRead();
+      allow write: if canWrite();
+    }
+    
+    // CV - everyone can read/download
+    match /settings/{id} {
+      allow read: if canRead();
+      allow write: if canWrite();
+    }
+    
+    // Optional: User collection for future admin users
+    match /users/{userId} {
+      allow read: if request.auth != null;
+      allow write: if isAdmin();
+    }
+  }
+}
