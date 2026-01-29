@@ -31,3 +31,5 @@ confic.js
  firestore.indexes.json
  firestore.rules
  storage.rules
+src/config.js
+src/config/config.js
